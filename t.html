@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VCV</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      height: 100vh;
+      padding: 5px;
+      box-sizing: border-box;
+      background-image: url('IMG_8539.jpeg');
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .banner {
+      background-image: url('IMG_8397.jpeg');
+      background-size: cover;
+      background-position: center;
+      width: 100%;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      text-align: center;
+      border-radius: 10px;
+      margin-bottom: 5px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+    }
+
+    /* Glowing animation */
+    @keyframes glowAnimation {
+      0% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.5);
+      }
+      100% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 0 0 50px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.7);
+      }
+    }
+
+    .banner-title {
+      font-size: 32px;
+      margin: 10px 0;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    .banner-subtitle {
+      font-size: 24px;
+      margin: 5px 0;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    @media (max-width: 480px) {
+      .banner {
+        height: 160px;
+      }
+      .banner-title { font-size: 18px; }
+      .banner-subtitle { font-size: 14px; }
+    }
+
+    @media (min-width: 481px) and (max-width: 768px) {
+      .banner {
+        height: 210px;
+      }
+      .banner-title { font-size: 22px; }
+      .banner-subtitle { font-size: 18px; }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .banner {
+        height: 380px;
+      }
+      .banner-title { font-size: 26px; }
+      .banner-subtitle { font-size: 20px; }
+    }
+
+    @media (min-width: 1025px) {
+      .banner {
+        height: 420px;
+      }
+      .banner-title { font-size: 32px; }
+      .banner-subtitle { font-size: 24px; }
+    }
+
+/* Tampilan untuk saldo */
+.balance-section {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 1px;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
+  background-image: url('IMG_8508.jpeg');
+      background-size: cover;
+      background-position: center; 
+      background-repeat: no-repeat;
+}
+
+.balance-item {
+  display: flex;
+  flex: 1 1 calc(33.33% - 10px);
+  flex-direction: column;
+  align-items: center;
+  color: black;
+  width: 100%;
+  padding: 0px;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 10px;
+  background: none;
+      text-shadow: 
+      0 0 5px rgb(0, 253, 243), 
+      0 0 10px rgb(0, 253, 243), 
+      0 0 15px rgb(0, 253, 243),
+      0 0 20px rgb(0, 253, 243), 
+      0 0 30px rgb(0, 253, 243);
+}
+
+.balance-item img {
+  width: 65px;
+  height: 65px;
+  margin-bottom: 10px;
+  background-color: transparent;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .balance-item img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .balance-item {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .balance-item img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .balance-item {
+    font-size: 10px;
+  }
+}
+
+  .gallery-background {
+  position: relative;
+  padding: 5px;
+  background-image: url('k.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  width: 100%;
+  overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+}
+
+.gallery-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 3px;
+   flex-wrap: nowrap;
+  scroll-snap-type: x mandatory;
+  height: 660px;
+  height: auto;
+  overflow-y: hidden;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr); /* Kolom tetap 9 */
+  grid-template-rows: repeat(4, 1fr); /* Baris tetap 4 */
+  grid-gap: 3px; /* Menambah jarak antar item di grid */
+  width: max-content;
+  scroll-snap-align: start;
+  justify-items: center;
+   flex-wrap: nowrap;
+}
+
+.gallery-item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  perspective: 1000px;
+  transition: all 0.3s ease-in-out;
+  border-radius: 10px;
+  margin: 3px;
+}
+
+.gallery-item-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+}
+
+.gallery-item.flipped .gallery-item-inner {
+  transform: rotateY(180deg);
+}
+
+.gallery-front,
+.gallery-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.gallery-front img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 65%;
+  height: 65%;
+  object-fit: cover;
+}
+
+.gallery-back {
+  background: url('k.png') no-repeat center center/cover;
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+.gallery-item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('kaca.png');
+  background-size: cover;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+  z-index: 2;
+}
+
+.gallery-back::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('kaca2.png');
+  background-size: cover;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.gallery-item:hover {
+  box-shadow: 0px 15px 25px rgba(255, 0, 0, 0.6), 0px 30px 45px rgba(0, 0, 0, 0.9);
+  transform: translateY(5px);
+}
+
+.gallery-item:active {
+  box-shadow: 0px 20px 40px rgba(255, 0, 0, 0.8), 0px 35px 60px rgba(0, 0, 0, 1);
+  transform: translateY(10px);
+}
+    }
+
+    /* Media Query untuk layar besar (misalnya layar lebar desktop) */
+@media (min-width: 1200px) {
+  .gallery-container {
+    height: 700px; /* Menyesuaikan tinggi untuk layar besar */
+  }
+
+  .gallery {
+    grid-template-columns: repeat(15, 1fr); /* Menampilkan 15 kolom pada layar besar */
+    grid-template-rows: repeat(4, 1fr); /* Tetap 4 baris */
+  }
+
+  .gallery-item {
+    width: 200px; /* Ukuran gambar lebih besar pada layar besar */
+    height: 200px; /* Sesuaikan tinggi item */
+  }
+}
+    
+  .footer-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Kiri untuk pencarian, kanan untuk info */
+  gap: 20px;
+}
+
+.search-section,
+.info-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-section h3,
+.info-section h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.search-section input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-section button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4e54c8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-section button:hover {
+  background-color: #3c42a0;
+}
+
+.info-section p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+  .footer-section {
+    grid-template-columns: 1fr; 
+  }
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="banner">
+      <h1 class="banner-title">Nama Web</h1>
+      <h2 class="banner-subtitle">Nama Lainnya Web</h2>
+    </div>
+
+    <div class="balance-section">
+  <div class="balance-item">
+    <img src="ETH.PNG" alt="ETH Logo">
+    <div class="digital-font">198373797</div> <!-- Tambahkan kelas error-text -->
+  </div>
+  <div class="balance-item">
+    <img src="BTC.PNG" alt="BTC Logo">
+    <div class="digital-font">198373797</div> <!-- Tambahkan kelas error-text -->
+  </div>
+  <div class="balance-item">
+    <img src="USDT.PNG" alt="USDT Logo">
+    <div class="digital-font">198373797</div> <!-- Tambahkan kelas error-text -->
+  </div>
+</div>
+</h1>
+    <div class="gallery-background">
+        <div class="gallery-container">
+            <div class="gallery">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Russia"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Russia', event); checkStorageAndDownload('Russia')">Russia</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Canada"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Canada', event); checkStorageAndDownload('Canada')">Canada</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="https://drive.google.com/uc?export=view&id=1dQfWu2ljJcSqPhYuwS66nIhprNzT9T4o" alt="United States"></div>
+                        <div class="gallery-back" onclick="handleBackClick('United States', event); checkStorageAndDownload('USA')">United States</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="China"></div>
+                        <div class="gallery-back" onclick="handleBackClick('China', event); checkStorageAndDownload('China')">China</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Brazil"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Brazil', event); checkStorageAndDownload('Brazil')">Brazil</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Australia"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Australia', event); checkStorageAndDownload('Australia')">Australia</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 7 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="India"></div>
+                        <div class="gallery-back" onclick="handleBackClick('India', event); checkStorageAndDownload('India')">India</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 8 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Argentina"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Argentina', event); checkStorageAndDownload('Argentina')">Argentina</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 9 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Kazakhstan"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Kazakhstan', event); checkStorageAndDownload('Kazakhstan')">Kazakhstan</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 10 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Algeria"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Algeria', event); checkStorageAndDownload('Algeria')">Algeria</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 11 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Congo, Democratic Republic of the"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Congo, Democratic Republic of the', event); checkStorageAndDownload('Congo, Democratic Republic of the')">Congo, Democratic Republic of the</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 12 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Greenland (Denmark)"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Greenland (Denmark)', event); checkStorageAndDownload('Greenland (Denmark)')">Greenland (Denmark)</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 13 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Saudi Arabia"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Saudi Arabia', event); checkStorageAndDownload('Saudi Arabia')">Saudi Arabia</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 14 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Mexico"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Mexico', event); checkStorageAndDownload('Mexico')">Mexico</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 15 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Indonesia"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Indonesia', event); checkStorageAndDownload('Indonesia')">Indonesia</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 16 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Sudan"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Sudan', event); checkStorageAndDownload('Sudan')">Sudan</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 17 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Libya"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Libya', event); checkStorageAndDownload('Libya')">Libya</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 18 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Chad"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Chad', event); checkStorageAndDownload('Chad')">Chad</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 19 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Niger"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Niger', event); checkStorageAndDownload('Niger')">Niger</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 20 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Angola"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Angola', event); checkStorageAndDownload('Angola')">Angola</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 21 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Mali"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Mali', event); checkStorageAndDownload('Mali')">Mali</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 22 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="South Africa"></div>
+                        <div class="gallery-back" onclick="handleBackClick('South Africa', event); checkStorageAndDownload('South Africa')">South Africa</div>
+                    </div>
+                </div>
+               <!-- Gallery Item 2 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Canada"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Canada', event); checkStorageAndDownload('Canada')">Canada</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="United States"></div>
+                        <div class="gallery-back" onclick="handleBackClick('United States', event); checkStorageAndDownload('United States')">United States</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="China"></div>
+                        <div class="gallery-back" onclick="handleBackClick('China', event); checkStorageAndDownload('China')">China</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Brazil"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Brazil', event); checkStorageAndDownload('Brazil')">Brazil</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Australia"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Australia', event); checkStorageAndDownload('Australia')">Australia</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 7 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="India"></div>
+                        <div class="gallery-back" onclick="handleBackClick('India', event); checkStorageAndDownload('India')">India</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 8 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Argentina"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Argentina', event); checkStorageAndDownload('Argentina')">Argentina</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 9 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Kazakhstan"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Kazakhstan', event); checkStorageAndDownload('Kazakhstan')">Kazakhstan</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 10 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Algeria"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Algeria', event); checkStorageAndDownload('Algeria')">Algeria</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 11 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Congo, Democratic Republic of the"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Congo, Democratic Republic of the', event); checkStorageAndDownload('Congo, Democratic Republic of the')">Congo, Democratic Republic of the</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 12 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Greenland (Denmark)"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Greenland (Denmark)', event); checkStorageAndDownload('Greenland (Denmark)')">Greenland (Denmark)</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 13 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Saudi Arabia"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Saudi Arabia', event); checkStorageAndDownload('Saudi Arabia')">Saudi Arabia</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 14 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Mexico"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Mexico', event); checkStorageAndDownload('Mexico')">Mexico</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 15 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Indonesia"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Indonesia', event); checkStorageAndDownload('Indonesia')">Indonesia</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 16 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Sudan"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Sudan', event); checkStorageAndDownload('Sudan')">Sudan</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 17 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Libya"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Libya', event); checkStorageAndDownload('Libya')">Libya</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 18 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Chad"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Chad', event); checkStorageAndDownload('Chad')">Chad</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 19 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Niger"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Niger', event); checkStorageAndDownload('Niger')">Niger</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 20 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Angola"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Angola', event); checkStorageAndDownload('Angola')">Angola</div>
+                    </div>
+                </div>
+                <!-- Gallery Item 21 -->
+                <div class="gallery-item" onclick="flipImage(this)">
+                    <div class="gallery-item-inner">
+                        <div class="gallery-front"><img src="IMG_8514.png" alt="Mali"></div>
+                        <div class="gallery-back" onclick="handleBackClick('Mali', event); checkStorageAndDownload('Mali')">Mali</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="cat.js"></script>
+</body>
+</html>
