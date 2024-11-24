@@ -153,28 +153,30 @@ const countries = [
 ];
 function createCountryGallery() {
   const galleryContainer = document.getElementById('gallery-container');
-
-  // Periksa apakah elemen galeri ditemukan
-  if (!galleryContainer) {
-    console.error("Galeri container tidak ditemukan!");
-    return;
-  }
-
-  // Tambahkan setiap item ke galeri
-  galleryData.forEach(item => {
-    // Buat elemen item
+  
+  // Tambahkan item-item galeri ke dalam container
+  for (let i = 0; i < 12; i++) {
     const galleryItem = document.createElement('div');
     galleryItem.classList.add('gallery-item');
-
-    // Tambahkan gambar
-    const img = document.createElement('img');
-    img.src = item.image; // Pastikan file gambar ada di folder yang sama
-    img.alt = item.title;
-
-    // Gabungkan elemen
-    galleryItem.appendChild(img);
+    
+    const galleryInner = document.createElement('div');
+    galleryInner.classList.add('gallery-item-inner');
+    
+    const galleryFront = document.createElement('div');
+    galleryFront.classList.add('gallery-front');
+    
+    const galleryImage = document.createElement('img');
+    galleryImage.src = `image${i + 1}.jpg`;  // Ganti dengan gambar yang sesuai
+    galleryFront.appendChild(galleryImage);
+    
+    const galleryBack = document.createElement('div');
+    galleryBack.classList.add('gallery-back');
+    galleryBack.innerHTML = `Image ${i + 1}`;
+    
+    galleryInner.appendChild(galleryFront);
+    galleryInner.appendChild(galleryBack);
+    galleryItem.appendChild(galleryInner);
+    
     galleryContainer.appendChild(galleryItem);
-  });
-
-  console.log("Galeri berhasil dibuat!");
+  }
 }
