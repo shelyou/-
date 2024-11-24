@@ -112,17 +112,19 @@ DOCTYPE html>
     <div class="digital-font">198373797</div> <!-- Tambahkan kelas error-text -->
   </div>
 </div>
-</h1>
-    <div class="gallery-background">
-        <div class="gallery-container">
-            <div class="gallery">
-                <div id="gallery-container" class="gallery-container"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  
+  <div class="gallery-background">
+    <div class="gallery-container">
+      <div id="gallery-container" class="gallery"></div>
     </div>
+  </div>
+
   <script src="dt.js"></script>
-    <script src="cat.js"></script>
+  <script src="cat.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      createCountryGallery();
+    });
+  </script>
 </body>
 </html>
