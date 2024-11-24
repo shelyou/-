@@ -154,8 +154,8 @@ const countries = [
 function createCountryGallery() {
   const galleryContainer = document.getElementById('gallery-container');
   
-  // Tambahkan item-item galeri ke dalam container
-  for (let i = 0; i < 12; i++) {
+  // Tambahkan item-item galeri ke dalam container berdasarkan data
+  countries.forEach((country, i) => {
     const galleryItem = document.createElement('div');
     galleryItem.classList.add('gallery-item');
     
@@ -165,18 +165,20 @@ function createCountryGallery() {
     const galleryFront = document.createElement('div');
     galleryFront.classList.add('gallery-front');
     
+    // Menggunakan gambar dari data
     const galleryImage = document.createElement('img');
-    galleryImage.src = `image${i + 1}.jpg`;  // Ganti dengan gambar yang sesuai
+    galleryImage.src = country.img;  // Menggunakan data gambar dari array
+    galleryImage.alt = country.name;  // Menambahkan alt dengan nama negara
     galleryFront.appendChild(galleryImage);
     
     const galleryBack = document.createElement('div');
     galleryBack.classList.add('gallery-back');
-    galleryBack.innerHTML = `Image ${i + 1}`;
+    galleryBack.innerHTML = country.name; // Menampilkan nama negara pada bagian belakang
     
     galleryInner.appendChild(galleryFront);
     galleryInner.appendChild(galleryBack);
     galleryItem.appendChild(galleryInner);
     
     galleryContainer.appendChild(galleryItem);
-  }
+  });
 }
