@@ -27,7 +27,8 @@ function handleOutsideClick(event) {
 document.addEventListener('click', handleOutsideClick);
 
 // Fungsi tambahan untuk menangani klik pada bagian belakang gambar
-function handleBackClick(country) {
+function handleBackClick(country, event) {
+  event.stopPropagation(); // Mencegah propagasi klik ke elemen induk
   alert('You clicked on the back of the image for ' + country);
 }
 
@@ -42,6 +43,7 @@ function haversine(lat1, lon1, lat2, lon2) {
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c; // returns the distance in km
 }
+
 // Check storage and download function
 function checkStorageAndDownload() {
   const sizeInZB = 9999999; // Example size (in ZB, adjust accordingly)
@@ -166,179 +168,16 @@ function generateTokenAndDownload() {
   const blob = new Blob([encryptedToken], { type: 'text/plain' });
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
-  link.download = 'tokenFile.txt';
+  link.download = 'encrypted_token.txt';
   link.click();
 }
 
-// Function to generate a random token of 22 characters
+// Generate a random token (for example purposes)
 function generateRandomToken() {
-  const charset = 'あいうえおかきくけこさしすせそたちつてとにぬねのまみむめもやゆよらりるれろわをんABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let token = '';
-  for (let i = 0; i < 22; i++) {
-    token += charset.charAt(Math.floor(Math.random() * charset.length));
-  }
-  return token;
+  return Math.random().toString(36).substr(2, 12); // Generate a random 12-character token
 }
 
-// Simple encryption (reverse the string)
+// Encrypt the token (for example purposes, you may use a better encryption method)
 function encryptToken(token) {
-  return token.split('').reverse().join('');
-}
-
-// Function to check if the token is expired
-function checkTokenExpiration() {
-  const expirationTime = sessionStorage.getItem('expiration');
-  if (expirationTime && Date.now() > expirationTime) {
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('expiration');
-    alert('Token has expired. Please generate a new one.');
-  } else {
-    alert('Token is still valid.');
-  }
-}
-
-// Update progress bar (dummy example)
-function updateProgressBar(percentage) {
-  const progressBar = document.getElementById('progressBar');
-  progressBar.style.width = percentage + '%';
-}
-
-// Toggle dark mode
-function toggleDarkMode() {
-  document.body.classList.toggle('dark-mode');
-}
-
-// Validate email format
-function validateEmail(email) {
-  const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-  return regex.test(email);
-}
-
-// Format date to long format
-function formatDate(date) {
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return new Date(date).toLocaleDateString(undefined, options);
-}
-
-// Show or hide an element
-function toggleVisibility(elementId) {
-  const element = document.getElementById(elementId);
-  element.style.display = (element.style.display === 'none' ? 'block' : 'none');
-}
-
-// Scroll to top of the page
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// Copy text to clipboard
-function copyTextToClipboard(text) {
-  const textarea = document.createElement('textarea');
-  textarea.value = text;
-  document.body.appendChild(textarea);
-  textarea.select();
-  document.execCommand('copy');
-  document.body.removeChild(textarea);
-}
-
-// Get cookie value
-function getCookie(name) {
-  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-  return match ? match[2] : null;
-}
-
-// Set cookie
-function setCookie(name, value, days) {
-  const d = new Date();
-  d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
-  const expires = 'expires=' + d.toUTCString();
-  document.cookie = name + '=' + value + ';' + expires + ';path=/';
-}
-
-// Track page view
-function trackPageView(page) {
-  window.ga('send', 'pageview', page);
-}
-
-// Get a random integer between min and max
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-// Disable right-click
-function disableRightClick(event) {
-  event.preventDefault();
-}
-document.addEventListener('contextmenu', disableRightClick);
-
-// Start countdown
-function startCountdown(endDate) {
-  const countdown = setInterval(function() {
-    const now = new Date().getTime();
-    const distance = endDate - now;
-
-    if (distance < 0) {
-      clearInterval(countdown);
-      alert('Countdown finished');
-    }
-  }, 1000);
-}
-
-// Change font size
-function changeFontSize(size) {
-  document.body.style.fontSize = size + 'px';
-}
-
-// Detect mobile device
-function isMobileDevice() {
-  return /Mobi|Android/i.test(navigator.userAgent);
-}
-
-// Create a toast notification
-function showToast(message) {
-  const toast = document.createElement('div');
-  toast.classList.add('toast');
-  toast.textContent = message;
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 3000);
-}
-
-// Convert hex to RGB
-function hexToRgb(hex) {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `rgb(${r}, ${g}, ${b})`;
-}
-
-// Check internet connection
-function checkInternetConnection() {
-  if (navigator.onLine) {
-    alert('You are online');
-  } else {
-    alert('You are offline');
-  }
-}
-
-// Save JSON to local storage
-function saveJsonToLocalStorage(key, jsonData) {
-  localStorage.setItem(key, JSON.stringify(jsonData));
-}
-
-// Validate password strength
-function validatePassword(password) {
-  const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-  return regex.test(password);
-}
-
-// Prevent form submit on Enter key
-function preventFormSubmitOnEnter(event) {
-  if (event.key === 'Enter') {
-    event.preventDefault();
-  }
-}
-
-function handleBackClick(country, event) {
-  event.stopPropagation(); // Mencegah propagasi klik ke elemen induk
-  alert('You clicked on the back of the image for ' + country);
+  return btoa(token); // Base64 encode the token
 }
