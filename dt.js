@@ -151,3 +151,30 @@ const countries = [
   { name: "Micronesia", img: "IMG_8514.png" },
   { name: "Nauru", img: "IMG_8514.png" }
 ];
+function createCountryGallery() {
+  const galleryContainer = document.getElementById("gallery-container");
+
+  countries.forEach((country) => {
+    const galleryItem = document.createElement("div");
+    galleryItem.classList.add("gallery-item");
+    
+    const img = document.createElement("img");
+    img.src = country.image;
+    img.alt = country.name;
+
+    // Tambahkan event listener untuk flip
+    galleryItem.addEventListener("click", () => flipImage(galleryItem));
+
+    // Jika gambar dibalik, tampilkan nama negara
+    const back = document.createElement("div");
+    back.classList.add("back");
+    back.innerText = country.name;
+    back.addEventListener("click", (event) => handleBackClick(country.name, event));
+
+    galleryItem.appendChild(img);
+    galleryItem.appendChild(back);
+    galleryContainer.appendChild(galleryItem);
+  });
+}
+
+document.addEventListene
