@@ -152,29 +152,29 @@ const countries = [
   { name: "Nauru", img: "IMG_8514.png" }
 ];
 function createCountryGallery() {
-  const galleryContainer = document.getElementById("gallery-container");
+  const galleryContainer = document.getElementById('gallery-container');
 
-  countries.forEach((country) => {
-    const galleryItem = document.createElement("div");
-    galleryItem.classList.add("gallery-item");
-    
-    const img = document.createElement("img");
-    img.src = country.image;
-    img.alt = country.name;
+  // Periksa apakah elemen galeri ditemukan
+  if (!galleryContainer) {
+    console.error("Galeri container tidak ditemukan!");
+    return;
+  }
 
-    // Tambahkan event listener untuk flip
-    galleryItem.addEventListener("click", () => flipImage(galleryItem));
+  // Tambahkan setiap item ke galeri
+  galleryData.forEach(item => {
+    // Buat elemen item
+    const galleryItem = document.createElement('div');
+    galleryItem.classList.add('gallery-item');
 
-    // Jika gambar dibalik, tampilkan nama negara
-    const back = document.createElement("div");
-    back.classList.add("back");
-    back.innerText = country.name;
-    back.addEventListener("click", (event) => handleBackClick(country.name, event));
+    // Tambahkan gambar
+    const img = document.createElement('img');
+    img.src = item.image; // Pastikan file gambar ada di folder yang sama
+    img.alt = item.title;
 
+    // Gabungkan elemen
     galleryItem.appendChild(img);
-    galleryItem.appendChild(back);
     galleryContainer.appendChild(galleryItem);
   });
-}
 
-document.addEventListene
+  console.log("Galeri berhasil dibuat!");
+}
