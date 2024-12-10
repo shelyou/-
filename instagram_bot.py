@@ -26,7 +26,7 @@ def search_and_interact(cl, hashtag, max_actions=10):
             cl.user_follow(media.user.pk)
             print(f"Followed: {media.user.username}")
             # Interval waktu acak
-            time.sleep(random.randint(30, 60))
+            time.sleep(random.randint(30, 60))  # Tunggu 30-60 detik sebelum tindakan berikutnya
     except Exception as e:
         print("Error saat berinteraksi:", e)
 
@@ -39,10 +39,15 @@ if __name__ == "__main__":
     client = login_instagram(IG_USERNAME, IG_PASSWORD)
     
     if client:
-        # Interaksi dengan hashtag target
-        target_hashtag = "travel", "nature", "photography", "日本旅行", "東京観光", 
+        # Daftar hashtag target
+        target_hashtags = [
+            "travel", "nature", "photography", "日本旅行", "東京観光", 
             "韓国여행", "케이팝", "fashion", "instatravel", "vacation",
             "beautifuldestinations", "landscapephotography", "streetwear",
             "outfitinspiration", "한국음식", "ラーメン", "寿司"
-  ]
-        search_and_interact(client, target_hashtag, max_actions=5000)
+        ]
+        
+        # Interaksi dengan setiap hashtag
+        for hashtag in target_hashtags:
+            print(f"Mulai interaksi dengan hashtag: #{hashtag}")
+            search_and_interact(client, hashtag, max_actions=30)  # Maksimal 30 tindakan per hashtag
