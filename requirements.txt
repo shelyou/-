@@ -1,4 +1,0 @@
-instabot
-instapy
-requests
-instagrapi
