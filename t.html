@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+
+    <style>
+        /* CSS Styles */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background-image: url('m.png'); /* Ganti dengan nama file gambar latar belakang */
+            background-size: cover; /* Agar gambar mengisi seluruh halaman */
+            background-position: center; /* Menyelaraskan gambar di tengah */
+            background-attachment: fixed; /* Membuat gambar tetap ketika scroll */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ff0000;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        .neumorphic-card {
+            position: relative;
+            background-color: rgba(26, 26, 26, 0.7); /* Transparansi lebih tinggi */
+            width: 400px;
+            height: auto;
+            margin: 1rem;
+            padding: 2rem;
+            border-radius: 5px;
+            border: 2px solid #ff0000; /* Garis tepi merah neon */
+            box-shadow:
+                15px 15px 30px rgba(0, 0, 0, 0), /* Bayangan sisi gelap */
+                -15px -15px 30px rgba(255, 0, 0, 0); /* Bayangan sisi terang */
+            overflow: hidden; /* Sembunyikan elemen di luar container */
+        }
+
+        .neumorphic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('q.png') no-repeat center center/cover; /* Gambar latar */
+            opacity: 1; /* Kurangi transparansi gambar latar */
+            z-index: 2;
+            pointer-events: none;
+            filter: drop-shadow(0px 5px 10px rgba(255, 0, 0, 0.7)); /* Tambahkan efek bayangan merah */
+        }
+
+        .neumorphic-card__header,
+        .neumorphic-form,
+        .neumorphic-card__footer {
+            position: relative;
+            z-index: 1; /* Pastikan konten lebih tinggi dari pseudo-elemen */
+        }
+
+        .neumorphic-card__header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .neumorphic-card__header img {
+            width: 100%; /* Atur lebar gambar sesuai container */
+            height: 100px; /* Atur tinggi gambar */
+        }
+
+        .neumorphic-form {
+            margin: 2rem 0;
+        }
+
+        .neumorphic-input-wrapper {
+            width: 100%;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .neumorphic-input-wrapper label {
+            font-size: 1rem;
+            font-weight: 300; /* Font tipis */
+            margin-left: 0.8rem;
+            color: #ff0000; /* Label merah neon */
+        }
+
+        .neumorphic-input-wrapper input {
+            border: 2px solid #ff0000; /* Garis tepi merah neon */
+            background-color: rgba(0, 0, 0, 0);
+            padding: 0.8rem 1.1rem;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            color: #ff0000; /* Teks merah neon */
+            box-shadow:
+                inset 5px 5px 15px rgba(0, 0, 0, 0.9), /* Bayangan dalam sisi gelap */
+                inset -5px -5px 15px rgba(255, 0, 0, 0.2); /* Bayangan dalam sisi terang */
+            transition: all 0.3s ease;
+        }
+
+        .neumorphic-input-wrapper input:focus {
+            box-shadow:
+                0 0 10px #ff0000, /* Efek neon saat fokus */
+                0 0 20px #ff0000;
+            outline: none;
+        }
+
+        .neumorphic-form button {
+            border: 2px solid #ff0000; /* Garis tepi merah neon */
+            background-color: rgba(0, 0, 0, 0); /* Transparansi pada button */
+            width: 100%;
+            margin: 0.6rem 0 1rem 0;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #ff0000; /* Merah neon */
+            text-transform: uppercase;
+            padding: 0.9rem;
+            border-radius: 5px;
+            box-shadow:
+                5px 5px 15px rgba(0, 0, 0, 0.8), /* Bayangan luar gelap */
+                -5px -5px 15px rgba(255, 0, 0, 0.2); /* Bayangan luar terang */
+            transition: all 0.3s ease;
+        }
+
+        .neumorphic-form button:hover {
+            box-shadow:
+                0 0 10px #ff0000, /* Efek neon saat hover */
+                0 0 20px #ff0000;
+        }
+
+        .neumorphic-card__footer p {
+            text-align: center;
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .neumorphic-card__footer a {
+            text-decoration: none;
+            color: #ff0000; /* Link merah neon */
+        }
+
+        .neumorphic-card__footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="neumorphic-card">
+        <div class="neumorphic-card__header">
+            <img src="p.png" alt="Login Logo">
+        </div>
+        <form id="login-form" onsubmit="loginUser(event)" class="neumorphic-form">
+            <div class="neumorphic-input-wrapper">
+                <label for="neumorphic-username">onion</label>
+                <input type="text" name="neumorphic-username" id="neumorphic-username" placeholder="Onion">
+            </div>
+            <div class="neumorphic-input-wrapper">
+                <label for="neumorphic-password">Password</label>
+                <input type="password" name="neumorphic-password" id="neumorphic-password" placeholder="Password">
+            </div>
+            <button type="submit">Sign in</button>
+        </form>
+    </div>
+
+    <script>
+        async function loginUser(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('neumorphic-username').value;
+            const password = document.getElementById('neumorphic-password').value;
+
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                localStorage.setItem('token', data.token);  // Simpan token di localStorage
+                window.location.href = 'x.html';  // Arahkan ke t.html setelah login berhasil
+            } else {
+                alert('Login failed: ' + data.message);
+            }
+        }
+    </script>
+</body>
+</html>
