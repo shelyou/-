@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Barang</title>
+</head>
+<body>
+    <h1>Input Barang</h1>
+    <form id="barangForm">
+        <label for="kodeBarang">Kode Barang:</label>
+        <input type="text" id="kodeBarang" required>
+        <br>
+        <label for="namaBarang">Nama Barang:</label>
+        <input type="text" id="namaBarang" required>
+        <br>
+        <label for="jumlahBarang">Jumlah Barang:</label>
+        <input type="number" id="jumlahBarang" required>
+        <br>
+        <label for="hargaBarang">Harga Barang:</label>
+        <input type="number" id="hargaBarang" required>
+        <br>
+        <button type="submit">Simpan</button>
+    </form>
+
+    <script>
+        document.getElementById('barangForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah form dari pengiriman default
+
+            const kodeBarang = document.getElementById('kodeBarang').value;
+            const namaBarang = document.getElementById('namaBarang').value;
+            const jumlahBarang = document.getElementById('jumlahBarang').value;
+            const hargaBarang = document.getElementById('hargaBarang').value;
+
+            // Simpan data ke localStorage (sebagai contoh)
+            let barangList = JSON.parse(localStorage.getItem('barangList')) || [];
+            barangList.push({ kode: kodeBarang, nama: namaBarang, jumlah: jumlahBarang, harga: hargaBarang });
+            localStorage.setItem('barangList', JSON.stringify(barangList));
+
+            alert('Barang berhasil disimpan!');
+            // Reset form
+            this.reset();
+        });
+    </script>
+</body>
+</html>
